@@ -28,7 +28,7 @@ namespace Wolf_Hack.SDK.Interfaces
             }
             catch
             {
-                Environment.Exit(-1);
+                Environment.Exit(-5);
             }
         }
     }

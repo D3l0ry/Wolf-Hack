@@ -47,18 +47,8 @@ namespace Wolf_Hack
             ChamsEnemyColorPanel.BackColor = Color.FromArgb(ConfigManager.CVisualChamsColor.Red, ConfigManager.CVisualChamsColor.Green, ConfigManager.CVisualChamsColor.Blue);
             #endregion
 
-            #region ESP
-            VisualESPActive.Checked = ConfigManager.CVisualESP.ESPActive;
-            VisualESPTracerActive.Checked = ConfigManager.CVisualESP.TracerActive;
-            VisualESPNameActive.Checked = ConfigManager.CVisualESP.NameActive;
-            VisualESPHealthActive.Checked = ConfigManager.CVisualESP.HealthActive;
-            VisualESPDistanceActive.Checked = ConfigManager.CVisualESP.DistanceActive;
-            VisualESPFovActive.Checked = ConfigManager.CVisualESP.FovActive;
-            #endregion
-
             #region Misc
             VisualMiscRadarActive.Checked = ConfigManager.CVisualMisc.RadarActive;
-            VisualMiscWaterMarkActive.Checked = ConfigManager.CVisualMisc.WaterMark;
             VisualMiscHitSoundActive.Checked = ConfigManager.CVisualMisc.HitSound;
             VisualMiscDangerZoneActive.Checked = ConfigManager.CVisualMisc.DangerZone;
             #endregion
@@ -194,38 +184,12 @@ namespace Wolf_Hack
         }
         #endregion
 
-        #region ESP
-        private void VisualESPActive_CheckedChanged(object sender, EventArgs e) => ConfigManager.CVisualESP.ESPActive = VisualESPActive.Checked;
-
-        private void VisualESPTracerActive_CheckedChanged(object sender, EventArgs e) => ConfigManager.CVisualESP.TracerActive = VisualESPTracerActive.Checked;
-
-        private void VisualESPNameActive_CheckedChanged(object sender, EventArgs e) => ConfigManager.CVisualESP.NameActive = VisualESPNameActive.Checked;
-
-        private void VisualESPHealthActive_CheckedChanged(object sender, EventArgs e) => ConfigManager.CVisualESP.HealthActive = VisualESPHealthActive.Checked;
-
-        private void VisualESPDistanceActive_CheckedChanged(object sender, EventArgs e) => ConfigManager.CVisualESP.DistanceActive = VisualESPDistanceActive.Checked;
-
-        private void VisualESPCrosshairNoneRadioButton_CheckedChanged(object sender, EventArgs e)
-        {
-        }
-
-        private void VisualESPCrosshairCrossRadioButton_CheckedChanged(object sender, EventArgs e)
-        {
-        }
-
-        private void VisualESPCrosshairDotRadioButton_CheckedChanged(object sender, EventArgs e)
-        {
-        }
-        #endregion
-
         #region Misc
         private void VisualMiscRadarActive_CheckedChanged(object sender, EventArgs e) => ConfigManager.CVisualMisc.RadarActive = VisualMiscRadarActive.Checked;
 
-        private void VisualMiscWaterMarkActive_CheckedChanged(object sender, EventArgs e) => ConfigManager.CVisualMisc.WaterMark = VisualMiscWaterMarkActive.Checked;
 
         private void VisualMiscHitSoundActive_CheckedChanged(object sender, EventArgs e) => ConfigManager.CVisualMisc.HitSound = VisualMiscHitSoundActive.Checked;
 
-        private void VisualESPFovActive_CheckedChanged(object sender, EventArgs e) => ConfigManager.CVisualESP.FovActive = VisualESPFovActive.Checked;
 
         private void VisualMiscDangerZoneActive_CheckedChanged(object sender, EventArgs e) => ConfigManager.CVisualMisc.DangerZone = VisualMiscDangerZoneActive.Checked;
         #endregion
