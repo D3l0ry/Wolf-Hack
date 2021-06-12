@@ -1,36 +1,13 @@
 ﻿using System;
 using System.Numerics;
 using System.Runtime.InteropServices;
-using System.Text;
 using Wolf_Hack.SDK.Dumpers;
-using Wolf_Hack.SDK.Mathematics;
 using static Wolf_Hack.SDK.Interfaces.Base;
 
 namespace Wolf_Hack.SDK.Interfaces.Engine
 {
-
-
-    internal unsafe struct VEngineClient
+    internal unsafe class VEngineClient
     {
-        [DllImport("kernel32", CharSet = CharSet.Ansi, ExactSpelling = true, SetLastError = true)]
-        static extern IntPtr GetProcAddress(IntPtr hModule, string procName);
-
-        [DllImport("kernel32", SetLastError = true, CharSet = CharSet.Ansi)]
-        static extern IntPtr LoadLibrary([MarshalAs(UnmanagedType.LPStr)]string lpFileName);
-
-
-        #region Delegates
-        [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-        private delegate void* CreateInterfaceFn([MarshalAs(UnmanagedType.LPStr)]string Function, IntPtr Index);
-        #endregion
-
-        #region Private Methods
-        private static CreateInterfaceFn GetInterface(IntPtr Library) => Marshal.GetDelegateForFunctionPointer<CreateInterfaceFn>(GetProcAddress(Library, "CreateInterface"));
-
-        private static void* GetInterface(IntPtr Library, string Function) => GetInterface(Library)(Function, IntPtr.Zero);
-        #endregion
-
-        #region Structures
         [StructLayout(LayoutKind.Sequential, Pack = 1)]
         internal struct SPlayerInfo
         {
@@ -53,59 +30,51 @@ namespace Wolf_Hack.SDK.Interfaces.Engine
             public fixed int m_dwCustomFiles[4];
             public char m_FilesDownloaded;
         }
-        #endregion
 
         /// <summary>
         /// Доступ к движку
         /// </summary>
-        public static IntPtr EngineBase => Memory.Read<IntPtr>(EngineAddress + OffsetDumper.OClientState);
+        public static IntPtr EngineBase => EngineModule.Read<IntPtr>((IntPtr)Offsets.OClientState);
 
-        /// <summary>
-        /// Командная строка игры
-        /// </summary>
-        /// <param name="cmd">аргумент</param>
-        /// <param name="encoding">кодировка</param>
-        public static void ClientCmd(string cmd)
-        {
-           Memory.GetExecutor().CallFunction(OffsetDumper.dwClientCmd,Encoding.UTF8.GetBytes(cmd));
-        }
+        ///// <summary>
+        ///// Командная строка игры
+        ///// </summary>
+        ///// <param name="cmd">аргумент</param>
+        ///// <param name="encoding">кодировка</param>
+        //public static void ClientCmd(string cmd)
+        //{
+        //    new Executor(process).Execute(Offsets.dwClientCmd, new Allocator(process).Alloc());
+        //}
 
         /// <summary>
         /// Получение индекса игрока
         /// </summary>
-        public static int GetLocalPlayer => Memory.Read<int>(EngineBase + OffsetDumper.OGetLocalPlayer) + 0x1;
-
-        /// <summary>
-        /// Информация об игроке
-        /// </summary>
-        /// <param name="Index"></param>
-        /// <returns></returns>
-        public static SPlayerInfo PlayerInfo(int Index) => Memory.Read<SPlayerInfo>((IntPtr)Memory.Read<int>((IntPtr)Memory.Read<int>((IntPtr)Memory.Read<int>((IntPtr)Memory.Read<int>(EngineBase + OffsetDumper.OPlayerInfo) + 0x40) + 0xC) + 0x28 + ((Index - 0x1) * 0x34)));
+        public static int GetLocalPlayer => Memory.Read<int>(EngineBase + Offsets.OGetLocalPlayer) + 1;
 
         /// <summary>
         /// Максимальное число игроков
         /// </summary>
-        public static int MaxPlayers => Memory.Read<int>(EngineBase + OffsetDumper.OMaxPlayer);
+        public static int MaxPlayers => Memory.Read<int>(EngineBase + Offsets.OMaxPlayer);
 
         /// <summary>
         /// Номер пропуска
         /// </summary>
-        public static int CurrentSequenceNumber => Memory.Read<int>(EngineBase + OffsetDumper.OCurrentSequenceNumber) + 0x2;
+        public static int CurrentSequenceNumber => Memory.Read<int>(EngineBase + Offsets.OCurrentSequenceNumber) + 0x2;
 
         /// <summary>
         /// Пакеты для сервера
         /// </summary>
-        public static byte SendPacket
-        {
-            set => Memory.Write(EngineAddress + OffsetDumper.OSendPacket, value);
-        }
+        public static void SetSendPacket(byte value) => EngineModule.Write((IntPtr)Offsets.OSendPacket, value);
 
         /// <summary>
         /// Обновление движка
         /// </summary>
         public static int DeltaTick
         {
-            set => Memory.Write(EngineBase + OffsetDumper.ODeltaTick, value);
+            set
+            {
+                Memory.Write(EngineBase + Offsets.ODeltaTick, value);
+            }
         }
 
         /// <summary>
@@ -113,8 +82,8 @@ namespace Wolf_Hack.SDK.Interfaces.Engine
         /// </summary>
         public static Vector3 ViewAngels
         {
-            get => Memory.Read<Vector3>(EngineBase + OffsetDumper.OVecViewAngles);
-            set => Memory.Write(EngineBase + OffsetDumper.OVecViewAngles, value.ClampAngle().NormalizeAngle());
+            get => Memory.Read<Vector3>(EngineBase + Offsets.OVecViewAngles);
+            set => Memory.Write(EngineBase + Offsets.OVecViewAngles, value);
         }
 
         //public static void SetClanTag([MarshalAs(UnmanagedType.LPStr)]string clanTag)
@@ -136,8 +105,8 @@ namespace Wolf_Hack.SDK.Interfaces.Engine
         //    };
         //    int size = shellCode.Length - 0x10;
 
-        //    IntPtr alloc = Memory.GetAllocator().Alloc((uint)shellCode.Length);
-        //    uint dwClanTag = (uint)OffsetDumper.dwSetClanTag;
+        //    IntPtr alloc = new Allocator(process).Alloc(shellCode.Length);
+        //    uint dwClanTag = (uint)Offsets.dwSetClanTag;
 
         //    uint tagAddress = (uint)(alloc + size);
         //    byte[] tagBytes = Encoding.UTF8.GetBytes(clanTag);
@@ -152,7 +121,7 @@ namespace Wolf_Hack.SDK.Interfaces.Engine
 
         //    Memory.WriteBytes(alloc, shellCode);
 
-        //    Memory.GetExecutor().Execute(alloc, IntPtr.Zero);
+        //    new Executor(process).Execute(alloc, IntPtr.Zero);
         //}
     }
 }

@@ -11,7 +11,7 @@ namespace Wolf_Hack.Client.Config
         public byte Red;
         public byte Green;
         public byte Blue;
-        public byte Allow;
+        public byte Alpha;
 
         public bool FullBloom;
     }
@@ -27,22 +27,10 @@ namespace Wolf_Hack.Client.Config
         public byte Blue;
     }
 
-    public struct CVisualESP
-    {
-        public bool ESPActive;
-        public bool TracerActive;
-        public bool NameActive;
-        public bool HealthActive;
-        public bool DistanceActive;
-        public bool FovActive;
-    }
-
     [Serializable]
     public struct CVisualMisc
     {
         public bool RadarActive;
-        public bool WaterMark;
-        public bool HitSound;
         public bool DangerZone;
     }
 }

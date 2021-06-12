@@ -52,6 +52,8 @@ namespace Wolf_Hack.SDK.Mathematics
                 Angles.Y = -180.0f;
             }
 
+            Angles.Z = 0;
+
             return Angles;
         }
 
@@ -62,27 +64,25 @@ namespace Wolf_Hack.SDK.Mathematics
         /// <returns></returns>
         public static Vector3 NormalizeAngle(this Vector3 Angle)
         {
-            while (Angle.X > 89.0f)
+            while (Angle.X >= 89.0f)
             {
-                Angle.X -= 179f;
+                Angle.X -= 180f;
             }
 
-            while (Angle.X < -89.0f)
+            while (Angle.X <= -89.0f)
             {
-                Angle.X += 179f;
+                Angle.X += 180f;
             }
 
-            while (Angle.Y > 180.0f)
+            while (Angle.Y >= 180.0f)
             {
                 Angle.Y -= 360.0f;
             }
 
-            while (Angle.Y < -180.0f)
+            while (Angle.Y <= -180.0f)
             {
                 Angle.Y += 360.0f;
             }
-
-            Angle.Z = 0.0f;
 
             return Angle;
         }

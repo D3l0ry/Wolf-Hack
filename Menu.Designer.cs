@@ -39,8 +39,6 @@
             this.VisualMiscGroupBox = new System.Windows.Forms.GroupBox();
             this.VisualMiscDangerZoneActive = new Wolf_Hack.Client.Component.LollipopCheckBox();
             this.VisualMiscDangerZoneLabel = new System.Windows.Forms.Label();
-            this.VisualMiscHitSoundActiveLabel = new System.Windows.Forms.Label();
-            this.VisualMiscHitSoundActive = new Wolf_Hack.Client.Component.LollipopCheckBox();
             this.VisualMiscRadarLabel = new System.Windows.Forms.Label();
             this.VisualMiscRadarActive = new Wolf_Hack.Client.Component.LollipopCheckBox();
             this.VisualChamsGroupBox = new System.Windows.Forms.GroupBox();
@@ -73,9 +71,6 @@
             this.AimMiscGroupBox = new System.Windows.Forms.GroupBox();
             this.AimDangerZoneActiveLabel = new System.Windows.Forms.Label();
             this.AimDangerZoneActive = new Wolf_Hack.Client.Component.LollipopCheckBox();
-            this.AimVisibleGroupBox = new System.Windows.Forms.GroupBox();
-            this.AimVisibleSpottedByMaskActive = new System.Windows.Forms.RadioButton();
-            this.AimVisibleSpottedActive = new System.Windows.Forms.RadioButton();
             this.AimRcsStandaloneGroupBox = new System.Windows.Forms.GroupBox();
             this.AimRcsStandaloneActiveLabel = new System.Windows.Forms.Label();
             this.AimRcsStandaloneYLabel = new System.Windows.Forms.Label();
@@ -103,9 +98,6 @@
             this.AimRcsActiveLabel = new System.Windows.Forms.Label();
             this.AimRcsActive = new Wolf_Hack.Client.Component.LollipopCheckBox();
             this.AimActive = new Wolf_Hack.Client.Component.LollipopCheckBox();
-            this.TriggerPage = new System.Windows.Forms.TabPage();
-            this.TriggerActiveLabel = new System.Windows.Forms.Label();
-            this.TriggerActive = new Wolf_Hack.Client.Component.LollipopCheckBox();
             this.MiscPage = new System.Windows.Forms.TabPage();
             this.NoFlashActiveLabel = new System.Windows.Forms.Label();
             this.BunnyHopActiveLabel = new System.Windows.Forms.Label();
@@ -124,7 +116,6 @@
             this.AimSilentGroupBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.SilentBoneTrackBar)).BeginInit();
             this.AimMiscGroupBox.SuspendLayout();
-            this.AimVisibleGroupBox.SuspendLayout();
             this.AimRcsStandaloneGroupBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.AimRcsStandaloneYTrackBar)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.AimRcsStandaloneXTrackBar)).BeginInit();
@@ -135,7 +126,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.AimSmoothTrackBar)).BeginInit();
             this.AimRcsGroupBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.AimRcsTrackBar)).BeginInit();
-            this.TriggerPage.SuspendLayout();
             this.MiscPage.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -189,7 +179,6 @@
             // 
             this.ModuleSettingsControl.Controls.Add(this.VisualPage);
             this.ModuleSettingsControl.Controls.Add(this.AimPage);
-            this.ModuleSettingsControl.Controls.Add(this.TriggerPage);
             this.ModuleSettingsControl.Controls.Add(this.MiscPage);
             this.ModuleSettingsControl.Dock = System.Windows.Forms.DockStyle.Fill;
             this.ModuleSettingsControl.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
@@ -217,15 +206,13 @@
             // 
             this.VisualMiscGroupBox.Controls.Add(this.VisualMiscDangerZoneActive);
             this.VisualMiscGroupBox.Controls.Add(this.VisualMiscDangerZoneLabel);
-            this.VisualMiscGroupBox.Controls.Add(this.VisualMiscHitSoundActiveLabel);
-            this.VisualMiscGroupBox.Controls.Add(this.VisualMiscHitSoundActive);
             this.VisualMiscGroupBox.Controls.Add(this.VisualMiscRadarLabel);
             this.VisualMiscGroupBox.Controls.Add(this.VisualMiscRadarActive);
             this.VisualMiscGroupBox.Dock = System.Windows.Forms.DockStyle.Top;
             this.VisualMiscGroupBox.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.VisualMiscGroupBox.Location = new System.Drawing.Point(0, 190);
             this.VisualMiscGroupBox.Name = "VisualMiscGroupBox";
-            this.VisualMiscGroupBox.Size = new System.Drawing.Size(717, 70);
+            this.VisualMiscGroupBox.Size = new System.Drawing.Size(717, 52);
             this.VisualMiscGroupBox.TabIndex = 3;
             this.VisualMiscGroupBox.TabStop = false;
             this.VisualMiscGroupBox.Text = "Misc";
@@ -250,27 +237,6 @@
             this.VisualMiscDangerZoneLabel.Size = new System.Drawing.Size(87, 13);
             this.VisualMiscDangerZoneLabel.TabIndex = 6;
             this.VisualMiscDangerZoneLabel.Text = "Запретная зона";
-            // 
-            // VisualMiscHitSoundActiveLabel
-            // 
-            this.VisualMiscHitSoundActiveLabel.AutoSize = true;
-            this.VisualMiscHitSoundActiveLabel.Location = new System.Drawing.Point(7, 42);
-            this.VisualMiscHitSoundActiveLabel.Name = "VisualMiscHitSoundActiveLabel";
-            this.VisualMiscHitSoundActiveLabel.Size = new System.Drawing.Size(89, 13);
-            this.VisualMiscHitSoundActiveLabel.TabIndex = 14;
-            this.VisualMiscHitSoundActiveLabel.Text = "Звук попадания";
-            // 
-            // VisualMiscHitSoundActive
-            // 
-            this.VisualMiscHitSoundActive.AutoSize = true;
-            this.VisualMiscHitSoundActive.EllipseBorderColor = "#8a2be2";
-            this.VisualMiscHitSoundActive.EllipseColor = "#8a2be2";
-            this.VisualMiscHitSoundActive.Location = new System.Drawing.Point(102, 40);
-            this.VisualMiscHitSoundActive.Name = "VisualMiscHitSoundActive";
-            this.VisualMiscHitSoundActive.Size = new System.Drawing.Size(47, 19);
-            this.VisualMiscHitSoundActive.TabIndex = 15;
-            this.VisualMiscHitSoundActive.UseVisualStyleBackColor = true;
-            this.VisualMiscHitSoundActive.CheckedChanged += new System.EventHandler(this.VisualMiscHitSoundActive_CheckedChanged);
             // 
             // VisualMiscRadarLabel
             // 
@@ -603,7 +569,6 @@
             // 
             this.AimMiscGroupBox.Controls.Add(this.AimDangerZoneActiveLabel);
             this.AimMiscGroupBox.Controls.Add(this.AimDangerZoneActive);
-            this.AimMiscGroupBox.Controls.Add(this.AimVisibleGroupBox);
             this.AimMiscGroupBox.Controls.Add(this.AimRcsStandaloneGroupBox);
             this.AimMiscGroupBox.Controls.Add(this.AimMouseAttackActiveLabel);
             this.AimMiscGroupBox.Controls.Add(this.AimMouseAttackActive);
@@ -635,50 +600,6 @@
             this.AimDangerZoneActive.TabIndex = 9;
             this.AimDangerZoneActive.UseVisualStyleBackColor = true;
             this.AimDangerZoneActive.CheckedChanged += new System.EventHandler(this.AimDangerZoneActive_CheckedChanged);
-            // 
-            // AimVisibleGroupBox
-            // 
-            this.AimVisibleGroupBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.AimVisibleGroupBox.Controls.Add(this.AimVisibleSpottedByMaskActive);
-            this.AimVisibleGroupBox.Controls.Add(this.AimVisibleSpottedActive);
-            this.AimVisibleGroupBox.Location = new System.Drawing.Point(300, 47);
-            this.AimVisibleGroupBox.Margin = new System.Windows.Forms.Padding(4);
-            this.AimVisibleGroupBox.Name = "AimVisibleGroupBox";
-            this.AimVisibleGroupBox.Padding = new System.Windows.Forms.Padding(4);
-            this.AimVisibleGroupBox.Size = new System.Drawing.Size(410, 124);
-            this.AimVisibleGroupBox.TabIndex = 7;
-            this.AimVisibleGroupBox.TabStop = false;
-            this.AimVisibleGroupBox.Text = "Видимость";
-            // 
-            // AimVisibleSpottedByMaskActive
-            // 
-            this.AimVisibleSpottedByMaskActive.AutoSize = true;
-            this.AimVisibleSpottedByMaskActive.Dock = System.Windows.Forms.DockStyle.Top;
-            this.AimVisibleSpottedByMaskActive.Location = new System.Drawing.Point(4, 35);
-            this.AimVisibleSpottedByMaskActive.Margin = new System.Windows.Forms.Padding(4);
-            this.AimVisibleSpottedByMaskActive.Name = "AimVisibleSpottedByMaskActive";
-            this.AimVisibleSpottedByMaskActive.Size = new System.Drawing.Size(402, 17);
-            this.AimVisibleSpottedByMaskActive.TabIndex = 2;
-            this.AimVisibleSpottedByMaskActive.TabStop = true;
-            this.AimVisibleSpottedByMaskActive.Text = "SpottedByMask";
-            this.AimVisibleSpottedByMaskActive.UseVisualStyleBackColor = true;
-            this.AimVisibleSpottedByMaskActive.CheckedChanged += new System.EventHandler(this.AimVisibleSpottedByMaskActive_CheckedChanged);
-            // 
-            // AimVisibleSpottedActive
-            // 
-            this.AimVisibleSpottedActive.AutoSize = true;
-            this.AimVisibleSpottedActive.Dock = System.Windows.Forms.DockStyle.Top;
-            this.AimVisibleSpottedActive.Location = new System.Drawing.Point(4, 18);
-            this.AimVisibleSpottedActive.Margin = new System.Windows.Forms.Padding(4);
-            this.AimVisibleSpottedActive.Name = "AimVisibleSpottedActive";
-            this.AimVisibleSpottedActive.Size = new System.Drawing.Size(402, 17);
-            this.AimVisibleSpottedActive.TabIndex = 1;
-            this.AimVisibleSpottedActive.TabStop = true;
-            this.AimVisibleSpottedActive.Text = "Spotted";
-            this.AimVisibleSpottedActive.UseVisualStyleBackColor = true;
-            this.AimVisibleSpottedActive.CheckedChanged += new System.EventHandler(this.AimVisibleSpottedActive_CheckedChanged);
             // 
             // AimRcsStandaloneGroupBox
             // 
@@ -895,7 +816,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.AimSmoothTrackBar.AutoSize = false;
             this.AimSmoothTrackBar.Location = new System.Drawing.Point(92, 153);
-            this.AimSmoothTrackBar.Maximum = 150;
+            this.AimSmoothTrackBar.Maximum = 1000;
             this.AimSmoothTrackBar.Minimum = 1;
             this.AimSmoothTrackBar.Name = "AimSmoothTrackBar";
             this.AimSmoothTrackBar.Size = new System.Drawing.Size(318, 35);
@@ -1040,38 +961,6 @@
             this.AimActive.UseVisualStyleBackColor = true;
             this.AimActive.CheckedChanged += new System.EventHandler(this.AimActive_CheckedChanged);
             // 
-            // TriggerPage
-            // 
-            this.TriggerPage.BackColor = System.Drawing.Color.White;
-            this.TriggerPage.Controls.Add(this.TriggerActiveLabel);
-            this.TriggerPage.Controls.Add(this.TriggerActive);
-            this.TriggerPage.Location = new System.Drawing.Point(4, 22);
-            this.TriggerPage.Name = "TriggerPage";
-            this.TriggerPage.Size = new System.Drawing.Size(717, 474);
-            this.TriggerPage.TabIndex = 4;
-            this.TriggerPage.Text = "Trigger";
-            // 
-            // TriggerActiveLabel
-            // 
-            this.TriggerActiveLabel.AutoSize = true;
-            this.TriggerActiveLabel.Location = new System.Drawing.Point(8, 10);
-            this.TriggerActiveLabel.Name = "TriggerActiveLabel";
-            this.TriggerActiveLabel.Size = new System.Drawing.Size(58, 13);
-            this.TriggerActiveLabel.TabIndex = 4;
-            this.TriggerActiveLabel.Text = "Включить";
-            // 
-            // TriggerActive
-            // 
-            this.TriggerActive.AutoSize = true;
-            this.TriggerActive.EllipseBorderColor = "#8a2be2";
-            this.TriggerActive.EllipseColor = "#8a2be2";
-            this.TriggerActive.Location = new System.Drawing.Point(72, 8);
-            this.TriggerActive.Name = "TriggerActive";
-            this.TriggerActive.Size = new System.Drawing.Size(47, 19);
-            this.TriggerActive.TabIndex = 5;
-            this.TriggerActive.UseVisualStyleBackColor = true;
-            this.TriggerActive.CheckedChanged += new System.EventHandler(this.TriggerActive_CheckedChanged);
-            // 
             // MiscPage
             // 
             this.MiscPage.BackColor = System.Drawing.Color.White;
@@ -1172,8 +1061,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.SilentBoneTrackBar)).EndInit();
             this.AimMiscGroupBox.ResumeLayout(false);
             this.AimMiscGroupBox.PerformLayout();
-            this.AimVisibleGroupBox.ResumeLayout(false);
-            this.AimVisibleGroupBox.PerformLayout();
             this.AimRcsStandaloneGroupBox.ResumeLayout(false);
             this.AimRcsStandaloneGroupBox.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.AimRcsStandaloneYTrackBar)).EndInit();
@@ -1187,8 +1074,6 @@
             this.AimRcsGroupBox.ResumeLayout(false);
             this.AimRcsGroupBox.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.AimRcsTrackBar)).EndInit();
-            this.TriggerPage.ResumeLayout(false);
-            this.TriggerPage.PerformLayout();
             this.MiscPage.ResumeLayout(false);
             this.MiscPage.PerformLayout();
             this.ResumeLayout(false);
@@ -1240,9 +1125,6 @@
         private System.Windows.Forms.Label AimRcsActiveLabel;
         private Client.Component.LollipopCheckBox AimRcsActive;
         private System.Windows.Forms.GroupBox AimMiscGroupBox;
-        private System.Windows.Forms.GroupBox AimVisibleGroupBox;
-        public System.Windows.Forms.RadioButton AimVisibleSpottedByMaskActive;
-        public System.Windows.Forms.RadioButton AimVisibleSpottedActive;
         private System.Windows.Forms.GroupBox AimRcsStandaloneGroupBox;
         private System.Windows.Forms.Label AimRcsStandaloneYLabel;
         private System.Windows.Forms.Label AimRcsStandaloneXLabel;
@@ -1273,11 +1155,6 @@
         private System.Windows.Forms.Label AimEnemyInAirActiveLabel;
         private Client.Component.LollipopCheckBox AimEnemyInAirActive;
         private System.Windows.Forms.GroupBox AimCheckGroupBox;
-        private System.Windows.Forms.Label VisualMiscHitSoundActiveLabel;
-        private Client.Component.LollipopCheckBox VisualMiscHitSoundActive;
-        private System.Windows.Forms.TabPage TriggerPage;
-        private System.Windows.Forms.Label TriggerActiveLabel;
-        private Client.Component.LollipopCheckBox TriggerActive;
         private System.Windows.Forms.TrackBar AimKillDelayTrackBar;
         private System.Windows.Forms.Label AimKillDelayLabel;
     }

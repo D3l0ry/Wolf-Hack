@@ -8,7 +8,7 @@
     <OutputType>WinExe</OutputType>
     <RootNamespace>Wolf_Hack</RootNamespace>
     <AssemblyName>Wolf Hack</AssemblyName>
-    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
@@ -27,11 +27,12 @@
     <IsWebBootstrapper>false</IsWebBootstrapper>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>x86</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
+    <DebugType>pdbonly</DebugType>
     <Optimize>false</Optimize>
     <OutputPath>bin\Debug\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
@@ -65,9 +66,9 @@
   </PropertyGroup>
   <PropertyGroup />
   <ItemGroup>
-    <Reference Include="NativeManager, Version=1.0.0.0, Culture=neutral, processorArchitecture=x86">
+    <Reference Include="NativeManager, Version=1.5.0.1, Culture=neutral, processorArchitecture=x86">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\NativeManager\bin\Release\netstandard2.0\NativeManager.dll</HintPath>
+      <HintPath>..\NativeManager\bin\Debug\netstandard2.0\NativeManager.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -83,6 +84,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="SDK\Dumpers\Offsets.cs" />
     <Compile Include="SDK\WinAPI\KeysCode.cs" />
     <Compile Include="Starter.cs" />
     <Compile Include="Client\Component\LollipopCheckBox.cs">
@@ -91,27 +93,20 @@
     <Compile Include="Client\Config\CAim.cs" />
     <Compile Include="Client\Config\CMisc.cs" />
     <Compile Include="Client\Config\ConfigManager.cs" />
-    <Compile Include="Client\Config\CTrigger.cs" />
     <Compile Include="Client\Config\CVisual.cs" />
-    <Compile Include="Module\Aim\Legit.cs" />
-    <Compile Include="Module\Aim\Trigger.cs" />
-    <Compile Include="Module\Misc\Misc.cs" />
-    <Compile Include="Module\Visual\VisualESP.cs" />
+    <Compile Include="Module\Legit.cs" />
+    <Compile Include="Module\Misc.cs" />
+    <Compile Include="Module\VisualESP.cs" />
     <Compile Include="SDK\Dumpers\OffsetDumper.cs" />
-    <Compile Include="SDK\Helper\Enum\EModule\ModuleID.cs" />
-    <Compile Include="SDK\Helper\Enum\EModule\ObserverModeID.cs" />
-    <Compile Include="SDK\Helper\Enum\EModule\TeamID.cs" />
-    <Compile Include="SDK\Helper\Enum\EModule\TriggerID.cs" />
-    <Compile Include="SDK\Helper\Enum\EModule\VisibleID.cs" />
+    <Compile Include="SDK\Enums\TeamID.cs" />
     <Compile Include="SDK\Interfaces\Client\Entity\IClientEntity.cs" />
     <Compile Include="SDK\Interfaces\Client\Entity\Structures\EntityBase.cs" />
     <Compile Include="SDK\Interfaces\Base.cs" />
     <Compile Include="SDK\Interfaces\Client\IClientEntityList.cs" />
     <Compile Include="SDK\Interfaces\Client\VClient.cs" />
     <Compile Include="SDK\Interfaces\Engine\VEngineClient.cs" />
-    <Compile Include="SDK\Helper\Enum\EModule\WeaponID.cs" />
+    <Compile Include="SDK\Enums\WeaponID.cs" />
     <Compile Include="SDK\Mathematics\Vector.cs" />
-    <Compile Include="SDK\Interfaces\Client\Entity\Structures\BasePlayer.cs" />
     <Compile Include="SDK\Interfaces\Client\Entity\Structures\BaseWeapon.cs" />
     <Compile Include="SDK\WinAPI\NativeMethods.cs" />
     <Compile Include="Menu.cs">
@@ -120,7 +115,7 @@
     <Compile Include="Menu.Designer.cs">
       <DependentUpon>Menu.cs</DependentUpon>
     </Compile>
-    <Compile Include="Module\Starting.cs" />
+    <Compile Include="Module\ModuleManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Menu.resx">
       <DependentUpon>Menu.cs</DependentUpon>
@@ -135,6 +130,7 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <None Include="packages.config" />
     <None Include="Properties\app.manifest" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

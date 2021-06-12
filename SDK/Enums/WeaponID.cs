@@ -1,6 +1,4 @@
-﻿using System.Runtime.InteropServices;
-
-namespace Wolf_Hack.SDK.Interfaces.Enum.EModule
+﻿namespace Wolf_Hack.SDK.Interfaces.Enums
 {
     public enum WeaponID
     {

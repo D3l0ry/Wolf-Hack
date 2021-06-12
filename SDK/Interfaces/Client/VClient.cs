@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Numerics;
 using System.Runtime.InteropServices;
-
 using Wolf_Hack.SDK.Dumpers;
 using static Wolf_Hack.SDK.Interfaces.Base;
 
@@ -11,7 +10,6 @@ namespace Wolf_Hack.SDK.Interfaces.Client
     {
         public static int CurrentSequenceNumber;
 
-        #region Structures
         [StructLayout(LayoutKind.Explicit)]
         internal struct SInput
         {
@@ -151,44 +149,56 @@ namespace Wolf_Hack.SDK.Interfaces.Client
             public Int16 m_siMouseDy;
 
             [FieldOffset(0x48)]
-            public bool m_bHasBeenPredicted;
+            public Int16 m_bHasBeenPredicted;
         }
 
-        [StructLayout(LayoutKind.Explicit, Pack = 1)]
-        private struct DispatchMessage
+        [StructLayout(LayoutKind.Sequential, Size = 0x38)]
+        public struct GlowObjectDefinition
         {
-            [FieldOffset(0x0)]
-            [MarshalAs(UnmanagedType.I4)]
-            public int message;
+            public int Entity;
 
-            [FieldOffset(0x4)]
-            [MarshalAs(UnmanagedType.I4)]
-            public int arg1;
+            public float Red;
+            public float Green;
+            public float Blue;
+            public float Alpha;
 
-            [FieldOffset(0x8)]
-            [MarshalAs(UnmanagedType.I4)]
-            public int arg2;
+            fixed byte pad[4];
 
-            [FieldOffset(0xC)]
-            [MarshalAs(UnmanagedType.I4)]
-            public int data;
-        }
-        #endregion
+            float m_flSomeFloat;
+
+            float bloomAmount;
+
+            float m_flAnotherFloat;
+
+            [MarshalAs(UnmanagedType.I1)]
+            public bool RenderWhenOccluded;
+
+            [MarshalAs(UnmanagedType.I1)]
+            public bool RenderWhenUnoccluded;
+
+            [MarshalAs(UnmanagedType.I1)]
+            public bool FullBloomRender;
+
+            byte pad1;
+
+            int fullBloomStencilTestValue;
+
+            public int glowStyle;
+
+            int splitScreenSlot;
+
+            int nextFreeSlot;
+        };
 
         /// <summary>
         /// Локальный игрок
         /// </summary>
-        public static IntPtr LocalPlayer => Memory.Read<IntPtr>(ClientAddress + OffsetDumper.OLocalPlayer);
+        public static IntPtr LocalPlayer => ClientModule.Read<IntPtr>((IntPtr)Offsets.OLocalPlayer);
 
         /// <summary>
         /// Вход для серверов
         /// </summary>
-        public static SInput Input => Memory.Read<SInput>(ClientAddress + OffsetDumper.OInput);
-
-        /// <summary>
-        /// Старый клиентский запрос
-        /// </summary>
-        public static SUserCMD OldUserCmd => Memory.Read<SUserCMD>((IntPtr)Input.m_pCommands + ((CurrentSequenceNumber - 1) % 150) * 0x64);
+        public static SInput Input => ClientModule.Read<SInput>((IntPtr)Offsets.OInput);
 
         /// <summary>
         /// Клиентский запрос
@@ -204,47 +214,23 @@ namespace Wolf_Hack.SDK.Interfaces.Client
         }
 
         /// <summary>
-        /// Обзорная матрица игрока
-        /// </summary>
-        public static float* ViewMatrix
-        {
-            get
-            {
-                float* Temp = stackalloc float[16];
-
-                for (int Index = 0; Index < 16; Index++)
-                {
-                    Temp[Index] = Memory.Read<float>(ClientAddress + OffsetDumper.OViewMatrix + (Index * 0x4));
-                }
-
-                return Temp;
-            }
-        }
-
-        /// <summary>
         /// Прыжок
         /// </summary>
-        public static SUserCMD.ButtonID ForceJump
-        {
-            set => Memory.Write(ClientAddress + OffsetDumper.OForceJump, (int)value);
-        }
+        public static void SetForceJump(SUserCMD.ButtonID value) => ClientModule.Write((IntPtr)Offsets.OForceJump, (int)value);
 
         /// <summary>
         /// Атака
         /// </summary>
-        public static SUserCMD.ButtonID ForceAttack
-        {
-            set => Memory.Write(ClientAddress + OffsetDumper.OForceAttack, (int)value);
-        }
+        public static void SetForceAttack(SUserCMD.ButtonID value) => ClientModule.Write((IntPtr)Offsets.OForceAttack, (int)value);
 
         /// <summary>
         /// Объекты свечения
         /// </summary>
-        public static int GlowObjectManager => Memory.Read<int>(ClientAddress + OffsetDumper.OGlowObjectManager);
+        public static int GlowObjectManager => ClientModule.Read<int>((IntPtr)Offsets.OGlowObjectManager);
 
-        /// <summary>
-        /// Объекты свечения
-        /// </summary>
-        public static int GlowObjectCount => Memory.Read<int>(ClientAddress + OffsetDumper.OGlowObjectManager + 0x4);
+        ///// <summary>
+        ///// Объекты свечения
+        ///// </summary>
+        //public static int GlowObjectCount => ClientModule.Read<int>((IntPtr)Offsets.OGlowObjectManager + 0x4);
     }
 }

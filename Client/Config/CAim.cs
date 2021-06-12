@@ -1,6 +1,5 @@
 ﻿using System;
-
-using Wolf_Hack.SDK.Interfaces.Enum.EModule;
+using Wolf_Hack.SDK.Interfaces.Enums;
 
 namespace Wolf_Hack.Client.Config
 {
@@ -25,7 +24,7 @@ namespace Wolf_Hack.Client.Config
 
         public float Smooth = 1;
 
-        public int KillDelay;
+        public int KillDelay = 0;
 
         public bool RcsStandaloneActive;
         public float RcsStandaloneX;
@@ -46,7 +45,5 @@ namespace Wolf_Hack.Client.Config
         public bool PlayerInAirActive;
         public bool EnemyInAirActive;
         public bool DangerZoneActive;
-
-        public VisibleID VisibleID;
     }
 }

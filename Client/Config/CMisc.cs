@@ -7,6 +7,5 @@ namespace Wolf_Hack.Client.Config
     {
         public bool BunnyHop;
         public bool NoFlash;
-        public bool ThirdPerson;
     }
 }

@@ -1,35 +1,18 @@
 ﻿using System;
-using System.Collections.Generic;
-
-using NativeManager.MemoryInteraction;
+using System.Diagnostics;
+using System.MemoryInteraction;
+using Wolf_Hack.SDK.Interfaces.Client.Entity.Structures;
 
 namespace Wolf_Hack.SDK.Interfaces
 {
-    internal struct Base
+    internal class Base
     {
-        #region Class
-        public static  MemoryManager Memory;
-        #endregion
+        public static Process process = Process.GetProcessesByName("csgo")[0];
+        public static MemoryManager Memory = process.GetMemoryManager();
 
-        #region Define
-        public static IntPtr ClientAddress;
-        public static IntPtr EngineAddress;
-        #endregion
+        public static ModuleManager ClientModule = Memory["client.dll"];
+        public static ModuleManager EngineModule = Memory["engine.dll"];
 
-        public static void Initialize()
-        {
-            try
-            {
-                Memory = new MemoryManager("csgo");
-                Dictionary<string, IntPtr> Modules = Memory.GetProcessInfo().GetModulesAddress();
-
-                ClientAddress = Modules["client_panorama.dll"];
-                EngineAddress = Modules["engine.dll"];
-            }
-            catch
-            {
-                Environment.Exit(-5);
-            }
-        }
+        public static EntityBase LocalPlayer = IntPtr.Zero;
     }
 }

@@ -1,4 +1,4 @@
-﻿namespace Wolf_Hack.SDK.Interfaces.Enum.EModule
+﻿namespace Wolf_Hack.SDK.Interfaces.Enums
 {
     internal enum TeamID
     {

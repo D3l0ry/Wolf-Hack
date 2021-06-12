@@ -1,31 +1,26 @@
-﻿using Wolf_Hack.SDK.Interfaces.Client.Entity.Structures;
+﻿using System;
+using Wolf_Hack.SDK.Interfaces.Client.Entity.Structures;
 
 namespace Wolf_Hack.SDK.Interfaces.Client.Entity
 {
-    internal unsafe struct IClientEntity
+    internal unsafe class IClientEntity
     {
-        #region Structures
-        public EntityBase* GetPlayer
-        {
-            get
-            {
-                fixed (void* Class = &this)
-                {
-                    return (EntityBase*)(uint)Class;
-                }
-            }
-        }
+        private readonly IntPtr m_Class;
 
-        public BaseWeapon* GetWeapon
+        private IClientEntity(IntPtr classPtr) => m_Class = classPtr;
+
+        public static implicit operator IClientEntity(IntPtr Value) => new IClientEntity(Value);
+
+        public static implicit operator IntPtr(IClientEntity Value) => Value.m_Class;
+
+        public static implicit operator bool(IClientEntity value) => value.m_Class != IntPtr.Zero;
+
+        public EntityBase GetPlayer
         {
             get
             {
-                fixed (void* Class = &this)
-                {
-                    return (BaseWeapon*)(uint)Class;
-                }
+                return m_Class;
             }
         }
-        #endregion
     }
 }

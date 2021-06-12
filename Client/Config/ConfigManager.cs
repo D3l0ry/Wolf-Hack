@@ -2,11 +2,11 @@
 using System.IO;
 using System.Xml.Serialization;
 
-using Wolf_Hack.SDK.Interfaces.Enum.EModule;
+using Wolf_Hack.SDK.Interfaces.Enums;
 
 namespace Wolf_Hack.Client.Config
 {
-    internal struct ConfigManager
+    internal class ConfigManager
     {
         private static string ConfigPath<T>() => $@"Config\{typeof(T).Name}.xml";
 
@@ -16,13 +16,12 @@ namespace Wolf_Hack.Client.Config
         public static CVisualGlowObjectManager CVisualGlowObjectManager = new CVisualGlowObjectManager()
         {
             Red = 255,
-            Allow = 255
+            Alpha = 255
         };
         public static CVisualChamsColor CVisualChamsColor = new CVisualChamsColor()
         {
             Red = 255
         };
-        public static CVisualESP CVisualESP = new CVisualESP();
         public static CVisualMisc CVisualMisc = new CVisualMisc();
         #endregion
 
@@ -65,15 +64,11 @@ namespace Wolf_Hack.Client.Config
         new CAimWeapon(WeaponID.WEAPON_SCAR20),
         new CAimWeapon(WeaponID.WEAPON_G3SG1),
         new CAimWeapon(WeaponID.WEAPON_NONE)
-         };
-        public static CAimMisc CAimMisc = new CAimMisc()
         {
-            VisibleID = VisibleID.SpottedByMask
-        };
-        #endregion
-
-        #region Trigger
-        public static CTrigger CTrigger = new CTrigger();
+            WeaponBone = 8
+        }
+         };
+        public static CAimMisc CAimMisc = new CAimMisc();
         #endregion
 
         #region Misc
@@ -86,14 +81,11 @@ namespace Wolf_Hack.Client.Config
             {
                 CVisualGlowObjectManager,
                 CVisualChamsColor,
-                CVisualESP,
                 CVisualMisc,
 
                 CAim,
                 CAimWeapon,
                 CAimMisc,
-
-                CTrigger,
 
                 CMisc
             };
@@ -128,14 +120,11 @@ namespace Wolf_Hack.Client.Config
                 {
                 CVisualGlowObjectManager,
                 CVisualChamsColor,
-                CVisualESP,
                 CVisualMisc,
 
                 CAim,
                 CAimWeapon,
                 CAimMisc,
-
-                CTrigger,
 
                 CMisc
                 };
