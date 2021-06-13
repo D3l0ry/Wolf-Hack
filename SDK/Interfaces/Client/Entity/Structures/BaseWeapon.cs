@@ -11,7 +11,7 @@ namespace Wolf_Hack.SDK.Interfaces.Client.Entity.Structures
         /// <summary>
         /// Handle активного оружия
         /// </summary>
-        public static IClientEntity ActiveWeaponHandle => IClientEntityList.GetClientEntityFromHandle(Memory.Read<int>(VClient.LocalPlayer + Offsets.OActiveWeapon));
+        public static IClientEntity ActiveWeaponHandle => IClientEntityList.GetClientEntityFromHandle(Memory.Read<int>((IntPtr)LocalPlayer + Offsets.OActiveWeapon));
 
         /// <summary>
         /// Активное оружие

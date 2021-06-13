@@ -3,7 +3,7 @@ using System.Windows.Forms;
 
 namespace Wolf_Hack
 {
-    class Starter
+    class Program
     {
         [STAThread]
         public static void Main()

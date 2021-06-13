@@ -9,7 +9,7 @@ namespace Wolf_Hack.Module.Visual
     {
         private bool GlowUpdate = true;
 
-        public void Tick(EntityBase entity)
+        public void Tick(PlayerBase entity)
         {
             if (!entity)
             {
@@ -21,17 +21,20 @@ namespace Wolf_Hack.Module.Visual
 
             if (ConfigManager.CVisualGlowObjectManager.GlowActive)
             {
-                if ((entityTeam != localPlayerTeam) && !ConfigManager.CVisualMisc.DangerZone)
+                if (entity.IsPlayer)
                 {
-                    entity.GlowRender(ConfigManager.CVisualGlowObjectManager, ConfigManager.CVisualGlowObjectManager.GlowHPActive);
-                }
-                else if ((entityTeam == localPlayerTeam) && !ConfigManager.CVisualMisc.DangerZone)
-                {
-                    entity.GlowRender(new CVisualGlowObjectManager());
-                }
-                else if (ConfigManager.CVisualMisc.DangerZone)
-                {
-                    entity.GlowRender(ConfigManager.CVisualGlowObjectManager, ConfigManager.CVisualGlowObjectManager.GlowHPActive);
+                    if ((entityTeam != localPlayerTeam) && !ConfigManager.CVisualMisc.DangerZone)
+                    {
+                        entity.GlowRender(ConfigManager.CVisualGlowObjectManager, ConfigManager.CVisualGlowObjectManager.GlowHPActive);
+                    }
+                    else if ((entityTeam == localPlayerTeam) && !ConfigManager.CVisualMisc.DangerZone)
+                    {
+                        entity.GlowRender(new CVisualGlowObjectManager());
+                    }
+                    else if (ConfigManager.CVisualMisc.DangerZone)
+                    {
+                        entity.GlowRender(ConfigManager.CVisualGlowObjectManager, ConfigManager.CVisualGlowObjectManager.GlowHPActive);
+                    }
                 }
 
                 Base.LocalPlayer.GlowUpdate(ref GlowUpdate);

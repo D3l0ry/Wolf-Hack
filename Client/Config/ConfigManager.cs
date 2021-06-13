@@ -95,7 +95,7 @@ namespace Wolf_Hack.Client.Config
                 Directory.CreateDirectory("Config");
             }
 
-            foreach (var ObjectSave in ObjectType)
+            foreach (object ObjectSave in ObjectType)
             {
                 using (FileStream FileStream = new FileStream(ConfigPath(ObjectSave), FileMode.Create, FileAccess.Write))
                 {
@@ -136,7 +136,7 @@ namespace Wolf_Hack.Client.Config
 
                 using (FileStream FileStream = new FileStream(ConfigPath<T>(), FileMode.Create, FileAccess.Write))
                 {
-                    foreach (var ObjectSave in ObjectType)
+                    foreach (object ObjectSave in ObjectType)
                     {
                         if (typeof(T).Name == ObjectSave.GetType().Name)
                         {

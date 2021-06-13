@@ -104,7 +104,7 @@ namespace Wolf_Hack.SDK.Interfaces.Client
             };
 
             [FieldOffset(0x0)]
-            private UIntPtr pVft;
+            private readonly UIntPtr pVft;
 
             [FieldOffset(0x04)]
             public Int32 m_iCmdNumber;
@@ -163,12 +163,9 @@ namespace Wolf_Hack.SDK.Interfaces.Client
             public float Alpha;
 
             fixed byte pad[4];
-
-            float m_flSomeFloat;
-
-            float bloomAmount;
-
-            float m_flAnotherFloat;
+            readonly float m_flSomeFloat;
+            readonly float bloomAmount;
+            readonly float m_flAnotherFloat;
 
             [MarshalAs(UnmanagedType.I1)]
             public bool RenderWhenOccluded;
@@ -178,22 +175,21 @@ namespace Wolf_Hack.SDK.Interfaces.Client
 
             [MarshalAs(UnmanagedType.I1)]
             public bool FullBloomRender;
-
-            byte pad1;
-
-            int fullBloomStencilTestValue;
+            readonly byte pad1;
+            readonly int fullBloomStencilTestValue;
 
             public int glowStyle;
-
-            int splitScreenSlot;
-
-            int nextFreeSlot;
+            readonly int splitScreenSlot;
+            readonly int nextFreeSlot;
         };
 
-        /// <summary>
-        /// Локальный игрок
-        /// </summary>
-        public static IntPtr LocalPlayer => ClientModule.Read<IntPtr>((IntPtr)Offsets.OLocalPlayer);
+        [StructLayout(LayoutKind.Sequential, Size = 3)]
+        public struct ChamsObjectDefinition
+        {
+            public byte Red;
+            public byte Green;
+            public byte Blue;
+        }
 
         /// <summary>
         /// Вход для серверов
@@ -227,10 +223,5 @@ namespace Wolf_Hack.SDK.Interfaces.Client
         /// Объекты свечения
         /// </summary>
         public static int GlowObjectManager => ClientModule.Read<int>((IntPtr)Offsets.OGlowObjectManager);
-
-        ///// <summary>
-        ///// Объекты свечения
-        ///// </summary>
-        //public static int GlowObjectCount => ClientModule.Read<int>((IntPtr)Offsets.OGlowObjectManager + 0x4);
     }
 }

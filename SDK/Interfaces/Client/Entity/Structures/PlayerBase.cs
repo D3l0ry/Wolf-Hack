@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Numerics;
 using Wolf_Hack.Client.Config;
@@ -11,17 +10,19 @@ using static Wolf_Hack.SDK.Interfaces.Base;
 
 namespace Wolf_Hack.SDK.Interfaces.Client.Entity.Structures
 {
-    internal unsafe class EntityBase : IComparable<EntityBase>
+    internal unsafe class PlayerBase : IComparable<PlayerBase>
     {
         public readonly IntPtr m_Class;
 
-        private EntityBase(IntPtr classPtr) => m_Class = classPtr;
+        private PlayerBase(IntPtr classPtr) => m_Class = classPtr;
 
-        public static implicit operator EntityBase(IntPtr Value) => new EntityBase(Value);
+        public static implicit operator PlayerBase(IntPtr Value) => new PlayerBase(Value);
 
-        public static implicit operator bool(EntityBase value) => value.m_Class != IntPtr.Zero;
+        public static explicit operator IntPtr(PlayerBase value) => value.m_Class;
 
-        public float Fov => Vector.GetFov(VEngineClient.ViewAngels, AngleToTarget(false,6, 0, false));
+        public static implicit operator bool(PlayerBase value) => value.m_Class != IntPtr.Zero;
+
+        public float Fov => Vector.GetFov(VEngineClient.ViewAngels, AngleToTarget(false, 6, 0, false));
 
         /// <summary>
         /// Команда игрока
@@ -37,7 +38,15 @@ namespace Wolf_Hack.SDK.Interfaces.Client.Entity.Structures
         /// <summary>
         /// Является ли объект игроком
         /// </summary>
-        public bool IsPlayer(TeamID Team) => Team == TeamID.CTTeam || Team == TeamID.TTeam;
+        public bool IsPlayer
+        {
+            get
+            {
+                TeamID team = Team;
+
+                return team == TeamID.CTTeam || team == TeamID.TTeam;
+            }
+        }
 
         /// <summary>
         /// Является ли игрок валидным
@@ -51,7 +60,7 @@ namespace Wolf_Hack.SDK.Interfaces.Client.Entity.Structures
         {
             get
             {
-                return Memory.Read<int>(m_Class + Offsets.OSpottedByMask) & (1 << Memory.Read<int>(VClient.LocalPlayer + 0x64) - 1);
+                return Memory.Read<int>(m_Class + Offsets.OSpottedByMask) & (1 << Memory.Read<int>((IntPtr)LocalPlayer + 0x64) - 1);
             }
 
             set
@@ -152,15 +161,25 @@ namespace Wolf_Hack.SDK.Interfaces.Client.Entity.Structures
         {
             if (Health)
             {
-                Memory.Write(m_Class + Offsets.OChamsRender, (byte)(255 - this.Health));
-                Memory.Write(m_Class + Offsets.OChamsRender + 0x1, (byte)(this.Health * 2.55));
-                Memory.Write<byte>(m_Class + Offsets.OChamsRender + 0x2, 0);
+                VClient.ChamsObjectDefinition chamsObjectDefinition = new VClient.ChamsObjectDefinition()
+                {
+                    Red = (byte)(255 - this.Health),
+                    Green = (byte)(this.Health * 2.55),
+                };
+
+                Memory.Write(m_Class + Offsets.OChamsRender, chamsObjectDefinition);
             }
             else
             {
-                Memory.Write(m_Class + Offsets.OChamsRender, CVisualChamsColor.Red);
-                Memory.Write(m_Class + Offsets.OChamsRender + 0x1, CVisualChamsColor.Green);
-                Memory.Write(m_Class + Offsets.OChamsRender + 0x2, CVisualChamsColor.Blue);
+
+                VClient.ChamsObjectDefinition chamsObjectDefinition = new VClient.ChamsObjectDefinition()
+                {
+                    Red = CVisualChamsColor.Red,
+                    Green = CVisualChamsColor.Green,
+                    Blue = CVisualChamsColor.Blue
+                };
+
+                Memory.Write(m_Class + Offsets.OChamsRender, chamsObjectDefinition);
             }
         }
 
@@ -316,9 +335,9 @@ namespace Wolf_Hack.SDK.Interfaces.Client.Entity.Structures
                 bones[index] = GetBonePosition(boneIndex++);
             }
 
-            return bones.Aggregate((current, next) => Vector.GetFov(VEngineClient.ViewAngels, AngleToTarget(false,current, 0, false)) < Vector.GetFov(VEngineClient.ViewAngels, AngleToTarget(false, next, 0, false)) ? current : next);
+            return bones.Aggregate((current, next) => Vector.GetFov(VEngineClient.ViewAngels, AngleToTarget(false, current, 0, false)) < Vector.GetFov(VEngineClient.ViewAngels, AngleToTarget(false, next, 0, false)) ? current : next);
         }
 
-        public int CompareTo(EntityBase other) => Fov.CompareTo(other.Fov);
+        public int CompareTo(PlayerBase other) => Fov.CompareTo(other.Fov);
     }
 }

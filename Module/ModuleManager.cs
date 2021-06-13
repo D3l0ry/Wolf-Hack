@@ -9,16 +9,16 @@ using Wolf_Hack.SDK.Interfaces.Engine;
 
 namespace Wolf_Hack.Module
 {
-    internal unsafe static class ModuleManager
+    internal static unsafe class ModuleManager
     {
         private static bool IsConnected = false;
         private static volatile int m_MaxPlayers = 0;
 
-        private static VisualESP m_Visual = new VisualESP();
-        private static Legit m_Legit = new Legit();
-        private static Misc m_Misc = new Misc();
+        private static readonly VisualESP m_Visual = new VisualESP();
+        private static readonly Legit m_Legit = new Legit();
+        private static readonly Misc m_Misc = new Misc();
 
-        private static Thread m_AimTask = new Thread(() =>
+        private static readonly Thread m_AimTask = new Thread(() =>
         {
             while (true)
             {
@@ -31,7 +31,7 @@ namespace Wolf_Hack.Module
             }
         });
 
-        private static Thread m_VisalTask = new Thread(() =>
+        private static readonly Thread m_VisalTask = new Thread(() =>
         {
             int index = 0;
 
@@ -63,12 +63,12 @@ namespace Wolf_Hack.Module
                     continue;
                 }
 
-                if(Base.LocalPlayer.Health  == 0)
+                if (Base.LocalPlayer.Health == 0)
                 {
                     continue;
                 }
 
-                EntityBase currentEntity = IClientEntityList.GetClientEntity(index).GetPlayer;
+                PlayerBase currentEntity = IClientEntityList.GetClientEntity(index).GetPlayer;
 
                 m_Visual.Tick(currentEntity);
 

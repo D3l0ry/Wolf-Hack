@@ -13,6 +13,6 @@ namespace Wolf_Hack.SDK.Interfaces
         public static ModuleManager ClientModule = Memory["client.dll"];
         public static ModuleManager EngineModule = Memory["engine.dll"];
 
-        public static EntityBase LocalPlayer = IntPtr.Zero;
+        public static PlayerBase LocalPlayer = IntPtr.Zero;
     }
 }

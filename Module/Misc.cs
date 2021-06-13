@@ -11,7 +11,10 @@ namespace Wolf_Hack.Module
         {
             if (ConfigManager.CMisc.BunnyHop)
             {
-                VClient.SetForceJump((NativeMethods.GetAsyncKeyState(KeysCode.VK_SPACE) && !Base.LocalPlayer.BhopFlag() && Base.LocalPlayer.Velocity > 25) ? VClient.SUserCMD.ButtonID.IN_JUMP : VClient.SUserCMD.ButtonID.IN_NOATTACK);
+                if(NativeMethods.GetAsyncKeyState(KeysCode.VK_SPACE) && !Base.LocalPlayer.BhopFlag() && Base.LocalPlayer.Velocity > 25)
+                {
+                    VClient.SetForceJump(VClient.SUserCMD.ButtonID.IN_JUMP);
+                }
             }
 
             if (ConfigManager.CMisc.NoFlash)

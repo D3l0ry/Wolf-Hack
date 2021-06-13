@@ -9,7 +9,7 @@ namespace Wolf_Hack.Client.Component
     class LollipopCheckBox : CheckBox
     {
         #region Variables
-        Timer AnimationTimer = new Timer
+        readonly Timer AnimationTimer = new Timer
         {
             Interval = 1
         };
@@ -20,12 +20,10 @@ namespace Wolf_Hack.Client.Component
 
         Color EllipseBackColor;
         Color EllipseBorderBackColor;
-
-        Color EnabledUnCheckedColor = ColorTranslator.FromHtml("#bcbfc4");
-        Color EnabledUnCheckedEllipseBorderColor = ColorTranslator.FromHtml("#a9acb0");
-
-        Color DisabledEllipseBackColor = ColorTranslator.FromHtml("#c3c4c6");
-        Color DisabledEllipseBorderBackColor = ColorTranslator.FromHtml("#90949a");
+        readonly Color EnabledUnCheckedColor = ColorTranslator.FromHtml("#bcbfc4");
+        readonly Color EnabledUnCheckedEllipseBorderColor = ColorTranslator.FromHtml("#a9acb0");
+        readonly Color DisabledEllipseBackColor = ColorTranslator.FromHtml("#c3c4c6");
+        readonly Color DisabledEllipseBorderBackColor = ColorTranslator.FromHtml("#90949a");
 
         uint PointAnimationNum = 4;
         #endregion

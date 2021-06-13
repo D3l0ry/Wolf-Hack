@@ -86,7 +86,7 @@
   <ItemGroup>
     <Compile Include="SDK\Dumpers\Offsets.cs" />
     <Compile Include="SDK\WinAPI\KeysCode.cs" />
-    <Compile Include="Starter.cs" />
+    <Compile Include="Program.cs" />
     <Compile Include="Client\Component\LollipopCheckBox.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -100,7 +100,7 @@
     <Compile Include="SDK\Dumpers\OffsetDumper.cs" />
     <Compile Include="SDK\Enums\TeamID.cs" />
     <Compile Include="SDK\Interfaces\Client\Entity\IClientEntity.cs" />
-    <Compile Include="SDK\Interfaces\Client\Entity\Structures\EntityBase.cs" />
+    <Compile Include="SDK\Interfaces\Client\Entity\Structures\PlayerBase.cs" />
     <Compile Include="SDK\Interfaces\Base.cs" />
     <Compile Include="SDK\Interfaces\Client\IClientEntityList.cs" />
     <Compile Include="SDK\Interfaces\Client\VClient.cs" />

@@ -21,7 +21,7 @@ namespace Wolf_Hack.SDK.Dumpers
 
                 string GetValueUrl = new WebClient().DownloadString(UrlOffset);
 
-                foreach (var Value in GetValueUrl.Split('\n'))
+                foreach (string Value in GetValueUrl.Split('\n'))
                 {
                     try
                     {

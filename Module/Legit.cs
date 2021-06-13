@@ -19,7 +19,7 @@ namespace Wolf_Hack.Module.Aim
         public static readonly string[] Bone = { "1", "2", "3", "Таз", "Пупок", "Живот", "Грудь", "Шея", "Голова" };
 
         private bool IsClosed = false;
-        private EntityBase m_Entity = IntPtr.Zero;
+        private PlayerBase m_Entity = IntPtr.Zero;
 
         private Vector3 OldAngle;
         private CAimWeapon ActiveWeapon;
@@ -40,7 +40,7 @@ namespace Wolf_Hack.Module.Aim
                         {
                             if (Base.LocalPlayer.CrosshairId > 0 && Base.LocalPlayer.CrosshairId < VEngineClient.MaxPlayers)
                             {
-                                EntityBase crosshairPlayer = IClientEntityList.GetClientEntity(Base.LocalPlayer.CrosshairId).GetPlayer;
+                                PlayerBase crosshairPlayer = IClientEntityList.GetClientEntity(Base.LocalPlayer.CrosshairId).GetPlayer;
 
                                 m_Entity = GetTarget(crosshairPlayer, ActiveWeapon, crosshairPlayer.Team, playerBaseTeam);
                             }
@@ -89,9 +89,9 @@ namespace Wolf_Hack.Module.Aim
             }
         }
 
-        public EntityBase NearestTarget()
+        public PlayerBase NearestTarget()
         {
-            List<EntityBase> entities = GetTargets();
+            List<PlayerBase> entities = GetTargets();
 
             if (entities.Count == 0)
             {
@@ -107,13 +107,13 @@ namespace Wolf_Hack.Module.Aim
         /// <param name="entity"></param>
         /// <param name="weapon"></param>
         /// <returns></returns>
-        private EntityBase GetTarget(EntityBase entity, CAimWeapon weapon, TeamID entityTeam, TeamID playerBaseTeam)
+        private PlayerBase GetTarget(PlayerBase entity, CAimWeapon weapon, TeamID entityTeam, TeamID playerBaseTeam)
         {
             if ((entityTeam == playerBaseTeam && !ConfigManager.CAimMisc.DangerZoneActive) || (ConfigManager.CAimMisc.PlayerInAirActive && Base.LocalPlayer.BhopFlag()) || (ConfigManager.CAimMisc.EnemyInAirActive && entity.InAir()))
             {
                 return IntPtr.Zero;
             }
-            else if (Vector.GetFov(VEngineClient.ViewAngels, entity.AngleToTarget(true,weapon.WeaponBone, weapon.RcsValue, weapon.RcsActive)) <= weapon.WeaponFov)
+            else if (Vector.GetFov(VEngineClient.ViewAngels, entity.AngleToTarget(true, weapon.WeaponBone, weapon.RcsValue, weapon.RcsActive)) <= weapon.WeaponFov)
             {
                 if (entity.SpottedByMask > 0)
                 {
@@ -124,20 +124,20 @@ namespace Wolf_Hack.Module.Aim
             return IntPtr.Zero;
         }
 
-        private List<EntityBase> GetTargets()
+        private List<PlayerBase> GetTargets()
         {
-            List<EntityBase> targets = new List<EntityBase>();
+            List<PlayerBase> targets = new List<PlayerBase>();
 
             for (int index = 0; index < VEngineClient.MaxPlayers; index++)
             {
-                EntityBase selectedTarget = IClientEntityList.GetClientEntity(index).GetPlayer;
+                PlayerBase selectedTarget = IClientEntityList.GetClientEntity(index).GetPlayer;
 
                 if (!selectedTarget || !selectedTarget.IsValid)
                 {
                     continue;
                 }
 
-                EntityBase target = GetTarget(selectedTarget, ActiveWeapon, selectedTarget.Team, Base.LocalPlayer.Team);
+                PlayerBase target = GetTarget(selectedTarget, ActiveWeapon, selectedTarget.Team, Base.LocalPlayer.Team);
 
                 if (target)
                 {
